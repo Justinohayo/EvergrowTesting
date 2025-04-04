@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Evergrow Testing</string>
+    <string name="app_name">Evergrow</string>
+    <string-array name="bogy_data">
+        <item>data1</item>
+        <item>data2</item>
+        <item>data3</item>
+    </string-array>
 </resources>

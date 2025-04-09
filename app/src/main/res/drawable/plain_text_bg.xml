@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shadow Layer (the "elevation" effect) -->
+    <item android:right="4dp" android:left="4dp" android:top="4dp" android:bottom="4dp">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="#80000000" /> <!-- Shadow color (semi-transparent black) -->
+            <corners android:radius="16dp" />  <!-- Rounded corners -->
+        </shape>
+    </item>
+
+    <!-- White Background Layer -->
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="#FFFFFF" /> <!-- White color -->
+            <corners android:radius="16dp" />  <!-- Rounded corners -->
+        </shape>
+    </item>
+</layer-list>

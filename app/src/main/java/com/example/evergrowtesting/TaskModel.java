@@ -38,8 +38,6 @@ public class TaskModel {
     }
 
     //ToString for testing
-
-
     @Override
     public String toString() {
         return "TaskModel{" +

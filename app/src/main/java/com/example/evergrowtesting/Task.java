@@ -30,4 +30,6 @@ public class Task {
     public boolean isCompleted() {
         return isCompleted;
     }
+
+    public String getDeadline() { return deadline; }
 }

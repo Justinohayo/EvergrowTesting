@@ -1,10 +1,11 @@
 package com.example.evergrowtesting;
 
 public class Task {
-    String taskName;
-    // Date deadline:
-    String description;
     boolean isCompleted;
+    String taskName;
+    String deadline;
+    String description;
+
 
     public Task(String taskName) {
         this.taskName = taskName;

@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setUpDailyTasks() {
-        String[] taskNames = getResources().getStringArray(R.array.bogy_data);
+        String[] dailyTaskNames = getResources().getStringArray(R.array.bogy_data);
 
-        for(int i=0; i<taskNames.length; i++) {
-            dailyTasks.add(new Task(taskNames[i]));
+        for(int i=0; i<dailyTaskNames.length; i++) {
+            dailyTasks.add(new Task(dailyTaskNames[i]));
         }
 
 

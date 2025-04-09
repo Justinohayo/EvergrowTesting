@@ -22,8 +22,6 @@ public class GoalModel {
     }
 
     //ToString for testing
-
-
     @Override
     public String toString() {
         return "GoalModel{" +

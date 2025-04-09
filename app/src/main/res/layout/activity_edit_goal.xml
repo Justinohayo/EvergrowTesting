@@ -20,7 +20,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="361dp"
+        android:layout_height="400dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="36dp"
         android:layout_marginRight="16dp"
@@ -30,7 +30,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="398dp"
             android:orientation="vertical">
 
             <EditText
@@ -48,12 +48,31 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="283dp"
+                android:layout_height="331dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:backgroundTint="#FCF5FD"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:paddingLeft="15dp"
+                        android:text="Complete"
+                        android:textSize="20sp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -123,13 +142,22 @@
 
                     <TextView
                         android:id="@+id/textView9"
-                        android:layout_width="255dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="46dp"
                         android:layout_marginLeft="15dp"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-black"
                         android:text="Tasks:"
                         android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/editTextText3"
+                        android:layout_width="199dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:inputType="text" />
 
                     <Button
                         android:id="@+id/button"
@@ -151,7 +179,7 @@
         android:layout_width="184dp"
         android:layout_height="62dp"
         android:layout_marginLeft="110dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:text="Save" />
 
 </LinearLayout>

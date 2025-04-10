@@ -55,7 +55,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long insert = db.insert(TASK_TABLE,null, cv);
 
-        return true;
+        if(insert == - 1)
+        {
+            return false;
+        }
+        else{
+            return true;
+
+        }
     }
 
     public boolean addoneGoal (GoalModel goalModel)
@@ -70,7 +77,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long insert = db.insert(GOAL_TABLE, null, cv);
 
-        return true;
+
+        if(insert == - 1)
+        {
+            return false;
+        }
+        else{
+            return true;
+
+        }
     }
 
 

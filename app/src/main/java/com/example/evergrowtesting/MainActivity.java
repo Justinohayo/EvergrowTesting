@@ -7,11 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    RecyclerView recyclerView;
     ArrayList<Task> dailyTasks = new ArrayList<>();
 
     @Override
@@ -25,14 +28,19 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        recyclerView = findViewById(R.id.recyclerView);
         setUpDailyTasks();
+        DT_RecyclerViewAdapter adapter = new DT_RecyclerViewAdapter(this, dailyTasks);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     public void setUpDailyTasks() {
-        String[] taskNames = getResources().getStringArray(R.array.bogy_data);
+        String[] dailyTaskNames = getResources().getStringArray(R.array.bogy_data);
 
-        for(int i=0; i<taskNames.length; i++) {
-            dailyTasks.add(new Task(taskNames[i]));
+        for(int i=0; i<dailyTaskNames.length; i++) {
+            dailyTasks.add(new Task(dailyTaskNames[i]));
         }
 
 

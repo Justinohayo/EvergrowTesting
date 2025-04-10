@@ -30,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
     String createtasktable = " CREATE TABLE " + TASK_TABLE + " (" + COLUMN_TASKID + " INTERGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_DESCRIPTION + " TEXT, " + COLUMN_CHECKDONE + " BOOL, " + COLUMN_DATE + " TEXT, " + COLUMN_GOALID + " INT)";
-    String creategoaltable = "CREATE TABLE " + GOAL_TABLE + ", " + COLUMN_GOALID + " INTERGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_DESCRIPTION1 + "TEXT, " + COLUMN_CHECKDONE1 + " BOOL, " + COLUMN_DATE1 + " TEXT )";
+    String creategoaltable = "CREATE TABLE " + GOAL_TABLE + " (" + COLUMN_GOALID + " INTERGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_DESCRIPTION1 + "TEXT, " + COLUMN_CHECKDONE1 + " BOOL, " + COLUMN_DATE1 + " TEXT )";
 
     db.execSQL(creategoaltable);
     db.execSQL(createtasktable);
@@ -53,6 +53,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_CHECKDONE, taskModel.isCheckDone());
         cv.put(COLUMN_GOALID, taskModel.getGoalid());
 
+        long insert = db.insert(TASK_TABLE,null, cv);
+
         return true;
     }
 
@@ -65,6 +67,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DESCRIPTION1, goalModel.getDescription());
         cv.put(COLUMN_DATE1, goalModel.getDate());
         cv.put(COLUMN_CHECKDONE1, goalModel.isCheckDone());
+
+        long insert = db.insert(GOAL_TABLE, null, cv);
 
         return true;
     }

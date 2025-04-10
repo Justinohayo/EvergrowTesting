@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class DT_RecyclerViewAdapter extends RecyclerView.Adapter<DT_RecyclerViewAdapter.MyViewHolder>{
 
+    // try not to delete this again
     Context context;
     ArrayList<Task> task;
 

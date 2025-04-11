@@ -62,6 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        cv.put(COLUMN_TASK_NAME, taskModel.getName());
         cv.put(COLUMN_DESCRIPTION, taskModel.getDescription());
         cv.put(COLUMN_DATE, taskModel.getDate());
         cv.put(COLUMN_CHECKDONE, taskModel.isCheckDone());
@@ -75,6 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        cv.put(COLUMN_GOAL_NAME, goalModel.getName());
         cv.put(COLUMN_GOAL_DESCRIPTION, goalModel.getDescription());
         cv.put(COLUMN_GOAL_CHECKDONE, goalModel.isCheckDone());
         cv.put(COLUMN_GOAL_DATE, goalModel.getDate());

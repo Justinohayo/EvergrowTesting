@@ -1,6 +1,11 @@
 package com.example.evergrowtesting;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,11 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<Task> dailyTasks = new ArrayList<>();
+    ArrayList<TaskModel> dailyTasks = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +46,50 @@ public class MainActivity extends AppCompatActivity {
         String[] dailyTaskNames = getResources().getStringArray(R.array.bogy_data);
 
         for(int i=0; i<dailyTaskNames.length; i++) {
-            dailyTasks.add(new Task(dailyTaskNames[i]));
+            dailyTasks.add(new TaskModel(dailyTaskNames[i]));
         }
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // Handle item selection based on ID
+        switch (Objects.requireNonNull(item.getTitle().toString())) {
+            case "Daily Tasks":
+                startActivity(new Intent(this, MainActivity.class));
+                //Toast.makeText(this,"Daily Tasks clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            case "Goal View":
+                startActivity(new Intent(this, GoalView.class));
+                //Toast.makeText(this,"Goal view clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            case "Edit Goal":
+                startActivity(new Intent(this, EditGoalActivity.class));
+                //Toast.makeText(this,"Goal edit clicked", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case "Task View":
+                startActivity(new Intent(this, TaskView.class));
+                //Toast.makeText(this,"Task view clicked", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case "Edit Tasks":
+                startActivity(new Intent(this, A_editTaskActivity.class));
+                //Toast.makeText(this,"Task edit clicked", Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

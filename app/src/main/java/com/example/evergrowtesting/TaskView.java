@@ -16,36 +16,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
-public class GoalView extends AppCompatActivity {
+//
+public class TaskView extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<GoalModel> goals = new ArrayList<>();
-
+    ArrayList<TaskModel> dailyTasks = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_goal_view);
+        setContentView(R.layout.activity_task_view);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        recyclerView = findViewById(R.id.recyclerView);
-        setUpGoalView();
-        G_RecyclerViewAdapter adapter = new G_RecyclerViewAdapter(this, goals);
+        recyclerView = findViewById(R.id.recyclerView2);
+        setUpDailyTasks();
+        DT_RecyclerViewAdapter adapter = new DT_RecyclerViewAdapter(this, dailyTasks);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void setUpGoalView() {
-        String[] goalsName = getResources().getStringArray(R.array.bogy_goal_data);
+    public void setUpDailyTasks() {
+        String[] dailyTaskNames = getResources().getStringArray(R.array.bogy_data);
 
-        for(int i=0; i<goalsName.length; i++) {
-            goals.add(new GoalModel(goalsName[i]));
+        for(int i=0; i<dailyTaskNames.length; i++) {
+            dailyTasks.add(new TaskModel(dailyTaskNames[i]));
         }
 
 
@@ -57,7 +56,6 @@ public class GoalView extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

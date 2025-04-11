@@ -32,7 +32,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/ed_task"
+                android:id="@+id/ed_goal"
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
                 android:background="@drawable/header_bg"
@@ -118,7 +118,7 @@
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/ed_taskdescription"
+                    android:id="@+id/ed_goaldescription"
                     android:layout_width="327dp"
                     android:layout_height="79dp"
                     android:layout_marginLeft="15dp"

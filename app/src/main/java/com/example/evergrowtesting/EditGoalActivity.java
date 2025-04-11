@@ -1,5 +1,6 @@
 package com.example.evergrowtesting;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.activity.EdgeToEdge;
@@ -27,6 +29,7 @@ public class EditGoalActivity extends AppCompatActivity {
     CheckBox goalcheckbox;
     TextView tv_task;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +41,36 @@ public class EditGoalActivity extends AppCompatActivity {
             return insets;
         });
 
+        btn_save = findViewById(R.id.btn_save);
+        btn_task = findViewById(R.id.btn_task);
+        ed_goal = findViewById(R.id.ed_goal);
+        ed_date = findViewById(R.id.ed_date);
+        ed_goaldescription = findViewById(R.id.ed_goaldescription);
+        goalcheckbox = findViewById(R.id.checkBox);
+        tv_task = findViewById(R.id.tv_task);
 
+        btn_task.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GoalModel goalModel;
+
+                try{
+                    goalModel = new GoalModel(-1, ed_goal.getText().toString(),ed_goaldescription.getText().toString(),goalcheckbox.isChecked(),ed_date.getText().toString());
+                    DatabaseHelper db = new DatabaseHelper(EditGoalActivity.this);
+                    boolean success = db.addOneGoal(goalModel);
+                    if (success) {
+                        Toast.makeText(EditGoalActivity.this, "Task saved successfully!", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(EditGoalActivity.this, "Failed to save task.", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (Exception e)
+                {
+                    Toast.makeText(EditGoalActivity.this, "Error occur while save",  Toast.LENGTH_LONG).show();
+                }
+
+                DatabaseHelper db = new DatabaseHelper(EditGoalActivity.this);
 
 
     }

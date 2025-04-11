@@ -71,6 +71,13 @@ public class EditGoalActivity extends AppCompatActivity {
             }
 
     });
+
+        btn_task.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(EditGoalActivity.this, TaskView.class));
+            }
+        });
 }
 
             @Override

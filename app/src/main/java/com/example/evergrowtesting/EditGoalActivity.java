@@ -2,6 +2,7 @@ package com.example.evergrowtesting;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -51,7 +52,16 @@ public class EditGoalActivity extends AppCompatActivity {
             public void onClick(View view) {
                 GoalModel goalModel;
 
-                goalModel = new GoalModel(-1, ed_goaldescription.getText().toString(),goalcheckbox.isChecked(),ed_date.getText().toString());
+                try{
+                    goalModel = new GoalModel(-1, ed_goaldescription.getText().toString(),goalcheckbox.isChecked(),ed_date.getText().toString());
+                    DatabaseHelper db = new DatabaseHelper(EditGoalActivity.this);
+                    boolean success = db.addOneGoal(goalModel);
+                } catch (Exception e)
+                {
+
+                }
+
+
 
             }
         });

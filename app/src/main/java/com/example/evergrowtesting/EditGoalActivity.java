@@ -20,6 +20,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class EditGoalActivity extends AppCompatActivity {
@@ -61,6 +62,8 @@ public class EditGoalActivity extends AppCompatActivity {
             ed_date.setText(incomingGoalModel.getDate());
             goalcheckbox.setChecked(incomingGoalModel.isCheckDone());
             goalId = incomingGoalModel.getGoalId();
+
+            loadTasksForGoal(goalId);
         } else {
             goalId = getIntent().getIntExtra("goalId", -1);
         }
@@ -126,6 +129,25 @@ public class EditGoalActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+
+    private void loadTasksForGoal(int goalId) {
+        DatabaseHelper db = new DatabaseHelper(this);
+        ArrayList<TaskModel> tasks = db.getTasksByGoalId(goalId);
+
+        if (tasks != null && !tasks.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (TaskModel task : tasks) {
+                sb.append("• ").append(task.getDescription());
+                if (task.isCheckDone()) sb.append("");
+                sb.append("\n");
+            }
+            tv_task.setText(sb.toString());
+        } else {
+            tv_task.setText("No tasks found for this goal.");
+        }
+    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

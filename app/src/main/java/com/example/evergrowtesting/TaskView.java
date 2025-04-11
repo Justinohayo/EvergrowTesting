@@ -46,6 +46,8 @@ public class TaskView extends AppCompatActivity {
         AddTaskbutton = findViewById(R.id.AddTaskbutton);
 
         recyclerView = findViewById(R.id.recyclerView2);
+
+
         //setUpDailyTasks();
 
         setUpAllTasks();
@@ -138,6 +140,7 @@ public class TaskView extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
     public void setUpAllTasks() {
         DatabaseHelper dbHelper = new DatabaseHelper(this);

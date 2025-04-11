@@ -34,7 +34,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/ed_task"
+                android:id="@+id/ed_goal"
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
                 android:background="@drawable/header_bg"
@@ -118,7 +118,7 @@
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/ed_taskdescription"
+                    android:id="@+id/ed_goaldescription"
                     android:layout_width="327dp"
                     android:layout_height="79dp"
                     android:layout_marginLeft="15dp"
@@ -150,17 +150,17 @@
                         android:text="Tasks:"
                         android:textSize="20sp" />
 
-                    <EditText
-                        android:id="@+id/editTextText3"
+                    <TextView
+                        android:id="@+id/tv_task"
                         android:layout_width="199dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@android:color/transparent"
                         android:ems="10"
-                        android:inputType="text" />
+                        android:text="TextView"
+                        android:textAlignment="center" />
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/btn_task"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"

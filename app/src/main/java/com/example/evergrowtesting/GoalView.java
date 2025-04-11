@@ -41,15 +41,22 @@ public class GoalView extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+// Testing
+//    public void setUpGoalView() {
+//        String[] goalsName = getResources().getStringArray(R.array.bogy_goal_data);
+//
+//        for(int i=0; i<goalsName.length; i++) {
+//            goals.add(new GoalModel(goalsName[i]));
+//        }
+//
+//
+//    }
+
     public void setUpGoalView() {
-        String[] goalsName = getResources().getStringArray(R.array.bogy_goal_data);
-
-        for(int i=0; i<goalsName.length; i++) {
-            goals.add(new GoalModel(goalsName[i]));
-        }
-
-
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        goals = dbHelper.getAllGoals(); // Pull from SQLite instead of resource array
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

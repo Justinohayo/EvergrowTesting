@@ -20,7 +20,7 @@ import java.util.Objects;
 public class TaskView extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<TaskModel> dailyTasks = new ArrayList<>();
+    ArrayList<TaskModel> tasks = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +34,33 @@ public class TaskView extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.recyclerView2);
-        setUpDailyTasks();
-        DT_RecyclerViewAdapter adapter = new DT_RecyclerViewAdapter(this, dailyTasks);
+        //setUpDailyTasks();
+
+        int goalId = getIntent().getIntExtra("goalId", -1);
+        if (goalId != -1) {
+            setUpTasks(goalId);
+        }
+
+        DT_RecyclerViewAdapter adapter = new DT_RecyclerViewAdapter(this, tasks);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void setUpDailyTasks() {
-        String[] dailyTaskNames = getResources().getStringArray(R.array.bogy_data);
+//    public void setUpDailyTasks() {
+//        String[] dailyTaskNames = getResources().getStringArray(R.array.bogy_data);
+//
+//        for(int i=0; i<dailyTaskNames.length; i++) {
+//            tasks.add(new TaskModel(dailyTaskNames[i]));
+//        }
+//
+//
+//    }
 
-        for(int i=0; i<dailyTaskNames.length; i++) {
-            dailyTasks.add(new TaskModel(dailyTaskNames[i]));
-        }
-
-
+    public void setUpTasks(int selectedGoalId) {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        tasks = dbHelper.getTasksByGoalId(selectedGoalId);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

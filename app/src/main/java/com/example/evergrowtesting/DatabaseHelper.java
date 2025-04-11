@@ -2,10 +2,13 @@ package com.example.evergrowtesting;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -74,4 +77,54 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long insert = db.insert(GOAL_TABLE, null, cv);
         return insert != -1;
     }
+
+
+    public ArrayList<GoalModel> getAllGoals() {
+        ArrayList<GoalModel> goals = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + GOAL_TABLE, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_GOALID));
+                String desc = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GOAL_DESCRIPTION));
+                boolean isComplete = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_GOAL_CHECKDONE)) == 1;
+                String date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GOAL_DATE));
+
+                goals.add(new GoalModel(id, desc, isComplete, date));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return goals;
+    }
+
+    public ArrayList<TaskModel> getTasksByGoalId(int goalId) {
+        ArrayList<TaskModel> tasks = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TASK_TABLE + " WHERE " + COLUMN_GOALID + " = ?",
+                new String[]{String.valueOf(goalId)}
+        );
+
+        if (cursor.moveToFirst()) {
+            do {
+                int taskId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TASKID));
+                String desc = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION));
+                boolean isComplete = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CHECKDONE)) == 1;
+                String date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE));
+
+                tasks.add(new TaskModel(taskId, desc, isComplete, date, goalId));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return tasks;
+    }
+
+
+
 }

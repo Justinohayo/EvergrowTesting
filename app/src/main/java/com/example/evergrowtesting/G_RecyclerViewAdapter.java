@@ -36,8 +36,16 @@ public class G_RecyclerViewAdapter extends RecyclerView.Adapter<G_RecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull G_RecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.taskCheckBox.setText(goals.get(position).getDescription());
-        holder.dateTextView.setText(goals.get(position).getDate());
+
+//        Testing no db
+//        holder.taskCheckBox.setText(goals.get(position).getDescription());
+//        holder.dateTextView.setText(goals.get(position).getDate());
+
+        GoalModel goal = goals.get(position);
+        holder.taskCheckBox.setText(goal.getDescription());
+        holder.taskCheckBox.setChecked(goal.isCheckDone());
+        holder.dateTextView.setText(goal.getDate());
+
 
         holder.itemBtn.setOnClickListener(v -> {
             Intent intent = new Intent(context, EditGoalActivity.class);

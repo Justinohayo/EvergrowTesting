@@ -92,11 +92,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_GOALID));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GOAL_NAME));
                 String desc = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GOAL_DESCRIPTION));
                 boolean isComplete = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_GOAL_CHECKDONE)) == 1;
                 String date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GOAL_DATE));
 
-                goals.add(new GoalModel(id, desc, isComplete, date));
+                goals.add(new GoalModel(id, name, desc, isComplete, date));
             } while (cursor.moveToNext());
         }
 
@@ -117,11 +118,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int taskId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TASKID));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TASK_NAME));
                 String desc = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION));
                 boolean isComplete = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CHECKDONE)) == 1;
                 String date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE));
 
-                tasks.add(new TaskModel(taskId, desc, isComplete, date, goalId));
+                tasks.add(new TaskModel(taskId, name, desc, isComplete, date, goalId));
             } while (cursor.moveToNext());
         }
 

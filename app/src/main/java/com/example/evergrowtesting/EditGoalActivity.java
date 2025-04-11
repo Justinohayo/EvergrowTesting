@@ -49,13 +49,12 @@ public class EditGoalActivity extends AppCompatActivity {
         goalcheckbox = findViewById(R.id.checkBox);
         tv_task = findViewById(R.id.tv_task);
 
-        btn_task.setOnClickListener(new View.OnClickListener() {
+        btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GoalModel goalModel;
-
-                try{
-                    goalModel = new GoalModel(-1, ed_goal.getText().toString(),ed_goaldescription.getText().toString(),goalcheckbox.isChecked(),ed_date.getText().toString());
+                try {
+                    goalModel = new GoalModel(-1, ed_goal.getText().toString(), ed_goaldescription.getText().toString(), goalcheckbox.isChecked(), ed_date.getText().toString());
                     DatabaseHelper db = new DatabaseHelper(EditGoalActivity.this);
                     boolean success = db.addOneGoal(goalModel);
                     if (success) {
@@ -65,58 +64,55 @@ public class EditGoalActivity extends AppCompatActivity {
                         Toast.makeText(EditGoalActivity.this, "Failed to save task.", Toast.LENGTH_SHORT).show();
                     }
 
-                } catch (Exception e)
-                {
-                    Toast.makeText(EditGoalActivity.this, "Error occur while save",  Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(EditGoalActivity.this, "Error occur while save", Toast.LENGTH_LONG).show();
                 }
 
-                DatabaseHelper db = new DatabaseHelper(EditGoalActivity.this);
+            }
 
 
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // Handle item selection based on ID
-        switch (Objects.requireNonNull(item.getTitle().toString())) {
-            case "Daily Tasks":
-                startActivity(new Intent(EditGoalActivity.this, MainActivity.class));
-                //Toast.makeText(this,"Daily Tasks clicked", Toast.LENGTH_SHORT).show();
+            @Override
+            public boolean onCreateOptionsMenu(Menu menu) {
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.menu, menu);
                 return true;
-            case "Goal View":
-                startActivity(new Intent(EditGoalActivity.this, GoalView.class));
-                //Toast.makeText(this,"Goal view clicked", Toast.LENGTH_SHORT).show();
-                return true;
-            case "Edit Goal":
-                startActivity(new Intent(EditGoalActivity.this, EditGoalActivity.class));
-                //Toast.makeText(this,"Goal edit clicked", Toast.LENGTH_SHORT).show();
-                return true;
+            }
 
-            case "Task View":
+            @Override
+            public boolean onOptionsItemSelected(MenuItem item) {
+
+                // Handle item selection based on ID
+                switch (Objects.requireNonNull(item.getTitle().toString())) {
+                    case "Daily Tasks":
+                        startActivity(new Intent(EditGoalActivity.this, MainActivity.class));
+                        //Toast.makeText(this,"Daily Tasks clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case "Goal View":
+                        startActivity(new Intent(EditGoalActivity.this, GoalView.class));
+                        //Toast.makeText(this,"Goal view clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case "Edit Goal":
+                        startActivity(new Intent(EditGoalActivity.this, EditGoalActivity.class));
+                        //Toast.makeText(this,"Goal edit clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case "Task View":
+                        startActivity(new Intent(EditGoalActivity.this, TaskView.class));
+                        //Toast.makeText(this,"Task view clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case "Edit Tasks":
+                        startActivity(new Intent(EditGoalActivity.this, A_editTaskActivity.class));
+                        //Toast.makeText(this,"Task edit clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    default:
+                        return super.onOptionsItemSelected(item);
+                }
+            }
+
+            public void onClickEditGoalButton(View view) {
                 startActivity(new Intent(EditGoalActivity.this, TaskView.class));
-                //Toast.makeText(this,"Task view clicked", Toast.LENGTH_SHORT).show();
-                return true;
+            }
 
-            case "Edit Tasks":
-                startActivity(new Intent(EditGoalActivity.this, A_editTaskActivity.class));
-                //Toast.makeText(this,"Task edit clicked", Toast.LENGTH_SHORT).show();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
         }
-    }
-
-    public void onClickEditGoalButton(View view){
-        startActivity(new Intent(this, TaskView.class));
-    }
-
-
-}

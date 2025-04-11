@@ -80,7 +80,6 @@ public class A_editTaskActivity extends AppCompatActivity {
                     Toast.makeText(A_editTaskActivity.this, "Error occur while save",  Toast.LENGTH_LONG).show();
                 }
 
-                DatabaseHelper db = new DatabaseHelper(A_editTaskActivity.this);
 
             }
         });

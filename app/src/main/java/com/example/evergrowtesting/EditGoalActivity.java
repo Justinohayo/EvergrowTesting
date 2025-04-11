@@ -70,6 +70,8 @@ public class EditGoalActivity extends AppCompatActivity {
 
             }
 
+    });
+}
 
             @Override
             public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,4 +117,3 @@ public class EditGoalActivity extends AppCompatActivity {
                 startActivity(new Intent(EditGoalActivity.this, TaskView.class));
             }
 
-        }

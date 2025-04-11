@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:text="Task"
-        android:textSize="24sp" />
+        android:text="Edit Tasks"
+        android:textSize="34sp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

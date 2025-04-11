@@ -15,8 +15,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:text="Goals"
-        android:textSize="24sp" />
+        android:text="Edit Goals"
+        android:textSize="34sp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

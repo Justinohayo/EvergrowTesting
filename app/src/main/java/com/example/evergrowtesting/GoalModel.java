@@ -21,6 +21,11 @@ public class GoalModel {
     public GoalModel() {
     }
 
+    // recycler testing purposes
+    public GoalModel(String description) {
+        this.description = description;
+    }
+
     //ToString for testing
     @Override
     public String toString() {

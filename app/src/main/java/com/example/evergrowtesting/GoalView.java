@@ -11,10 +11,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class GoalView extends AppCompatActivity {
+
+    RecyclerView recyclerView;
+    ArrayList<GoalModel> goals = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,22 @@ public class GoalView extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        recyclerView = findViewById(R.id.recyclerView);
+        setUpGoalView();
+        G_RecyclerViewAdapter adapter = new G_RecyclerViewAdapter(this, goals);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void setUpGoalView() {
+        String[] goalsName = getResources().getStringArray(R.array.bogy_goal_data);
+
+        for(int i=0; i<goalsName.length; i++) {
+            goals.add(new GoalModel(goalsName[i]));
+        }
+
+
     }
 
     @Override

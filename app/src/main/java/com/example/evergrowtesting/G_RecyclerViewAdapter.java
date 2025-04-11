@@ -12,36 +12,36 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class DT_RecyclerViewAdapter extends RecyclerView.Adapter<DT_RecyclerViewAdapter.MyViewHolder>{
+public class G_RecyclerViewAdapter extends RecyclerView.Adapter<G_RecyclerViewAdapter.MyViewHolder>{
 
-    // try not to delete this again
     Context context;
-    ArrayList<Task> task;
+    ArrayList<GoalModel> goals;
 
-    public DT_RecyclerViewAdapter(Context context, ArrayList<Task> task) {
+    public G_RecyclerViewAdapter(Context context, ArrayList<GoalModel> goals) {
         this.context = context;
-        this.task = task;
+        this.goals = goals;
     }
 
 
     @NonNull
     @Override
-    public DT_RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public G_RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recycler_view_row, parent, false);
-        return new DT_RecyclerViewAdapter.MyViewHolder(view);
+        return new G_RecyclerViewAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DT_RecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.taskCheckBox.setText(task.get(position).getTaskName());
-        holder.dateTextView.setText(task.get(position).getDeadline());
+    public void onBindViewHolder(@NonNull G_RecyclerViewAdapter.MyViewHolder holder, int position) {
+        holder.taskCheckBox.setText(goals.get(position).getDescription());
+        holder.dateTextView.setText(goals.get(position).getDate());
     }
+
 
     @Override
     public int getItemCount() {
-        return task.size();
+        return goals.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -57,6 +57,5 @@ public class DT_RecyclerViewAdapter extends RecyclerView.Adapter<DT_RecyclerView
 
         }
     }
-
 
 }

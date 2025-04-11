@@ -22,6 +22,7 @@ public class GoalView extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<GoalModel> goals = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

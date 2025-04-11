@@ -1,11 +1,14 @@
 package com.example.evergrowtesting;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Button;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,9 +19,9 @@ public class DT_RecyclerViewAdapter extends RecyclerView.Adapter<DT_RecyclerView
 
     // try not to delete this again
     Context context;
-    ArrayList<Task> task;
+    ArrayList<TaskModel> task;
 
-    public DT_RecyclerViewAdapter(Context context, ArrayList<Task> task) {
+    public DT_RecyclerViewAdapter(Context context, ArrayList<TaskModel> task) {
         this.context = context;
         this.task = task;
     }
@@ -35,8 +38,15 @@ public class DT_RecyclerViewAdapter extends RecyclerView.Adapter<DT_RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull DT_RecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.taskCheckBox.setText(task.get(position).getTaskName());
-        holder.dateTextView.setText(task.get(position).getDeadline());
+        holder.taskCheckBox.setText(task.get(position).getDescription());
+        holder.dateTextView.setText(task.get(position).getDate());
+
+        holder.itemBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(context, A_editTaskActivity.class);
+            intent.putExtra("item", task.get(position));  // Pass the object
+            context.startActivity(intent);
+        });
+
     }
 
     @Override
@@ -49,14 +59,25 @@ public class DT_RecyclerViewAdapter extends RecyclerView.Adapter<DT_RecyclerView
         CheckBox taskCheckBox;
         TextView dateTextView;
 
+        Button itemBtn;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             taskCheckBox = itemView.findViewById(R.id.checkBox);
             dateTextView = itemView.findViewById(R.id.textView);
+            itemBtn = itemView.findViewById(R.id.itemBtn);
 
         }
+
+
+
+
     }
+
+
+
+
 
 
 }

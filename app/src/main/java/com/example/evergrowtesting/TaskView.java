@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.Objects;
 public class TaskView extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<Task> dailyTasks = new ArrayList<>();
+    ArrayList<TaskModel> dailyTasks = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,22 @@ public class TaskView extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        recyclerView = findViewById(R.id.recyclerView2);
+        setUpDailyTasks();
+        DT_RecyclerViewAdapter adapter = new DT_RecyclerViewAdapter(this, dailyTasks);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void setUpDailyTasks() {
+        String[] dailyTaskNames = getResources().getStringArray(R.array.bogy_data);
+
+        for(int i=0; i<dailyTaskNames.length; i++) {
+            dailyTasks.add(new TaskModel(dailyTaskNames[i]));
+        }
+
+
     }
 
     @Override

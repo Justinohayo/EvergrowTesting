@@ -41,6 +41,8 @@ public class TaskView extends AppCompatActivity {
             return insets;
         });
 
+
+
         AddTaskbutton = findViewById(R.id.AddTaskbutton);
 
         recyclerView = findViewById(R.id.recyclerView2);
@@ -81,6 +83,7 @@ public class TaskView extends AppCompatActivity {
     }
 
 
+
 //    public void setUpTasks(int selectedGoalId) {
 //        DatabaseHelper dbHelper = new DatabaseHelper(this);
 //        tasks = dbHelper.getTasksByGoalId(selectedGoalId);
@@ -107,6 +110,7 @@ public class TaskView extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

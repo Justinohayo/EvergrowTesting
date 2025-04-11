@@ -22,7 +22,6 @@ public class GoalView extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<GoalModel> goals = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,17 +40,6 @@ public class GoalView extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-// Testing
-//    public void setUpGoalView() {
-//        String[] goalsName = getResources().getStringArray(R.array.bogy_goal_data);
-//
-//        for(int i=0; i<goalsName.length; i++) {
-//            goals.add(new GoalModel(goalsName[i]));
-//        }
-//
-//
-//    }
-
     public void setUpGoalView() {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
         goals = dbHelper.getAllGoals(); // Pull from SQLite instead of resource array
@@ -63,6 +51,13 @@ public class GoalView extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpGoalView(); // Fetch goals again from DB
+        recyclerView.setAdapter(new G_RecyclerViewAdapter(this, goals));
     }
 
     @Override

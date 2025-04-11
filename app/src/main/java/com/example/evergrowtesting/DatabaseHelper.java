@@ -143,6 +143,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rows > 0;
     }
 
+    public boolean deleteGoal(int GoalId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete(GOAL_TABLE, COLUMN_GOALID + " = ?", new String[]{String.valueOf(GoalId)});
+        return rows > 0;
+    }
+
     public boolean updateTask(TaskModel taskModel){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -155,6 +162,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         int rows = db.update(TASK_TABLE,cv,COLUMN_TASKID+" = ?", new String[]{String.valueOf(taskModel.getTaskid())});
         return rows > 0;
+    }
+
+    public boolean updateGoal(GoalModel goalModel){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_GOAL_NAME, goalModel.getName());
+        cv.put(COLUMN_GOAL_DESCRIPTION, goalModel.getDescription());
+        cv.put(COLUMN_GOAL_CHECKDONE, goalModel.isCheckDone());
+        cv.put(COLUMN_GOAL_DATE, goalModel.getDate());
+
+        int rows = db.update(GOAL_TABLE,cv,COLUMN_GOALID+" = ?", new String[]{String.valueOf(goalModel.getGoalId())});
+        return rows > 0;
+
     }
 
 

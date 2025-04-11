@@ -29,6 +29,7 @@ public class A_editTaskActivity extends AppCompatActivity {
 
     CheckBox taskcheckbox;
 
+    TaskModel incomingtaskModel;
     int goalId;
 
 
@@ -42,9 +43,7 @@ public class A_editTaskActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
 
-
         });
-
 
         btn_save = findViewById(R.id.btn_save);
         ed_date = findViewById(R.id.ed_date);
@@ -55,62 +54,62 @@ public class A_editTaskActivity extends AppCompatActivity {
         // get the id from goalmodel
         goalId = getIntent().getIntExtra("goalId", -1);
 
+        incomingtaskModel = (TaskModel) getIntent().getSerializableExtra("item");
+        goalId = getIntent().getIntExtra("goalId", -1);
 
-//        btn_save.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                TaskModel taskModel;
-//                GoalModel goalModel;
-//
-//                try {
-//                    taskModel = new TaskModel(-1, ed_task.getText().toString(), ed_taskdescription.getText().toString(), taskcheckbox.isChecked(), ed_date.getText().toString(), goalId);
-//
-//                    DatabaseHelper db = new DatabaseHelper(A_editTaskActivity.this);
-//                    boolean success = db.addOneTask(taskModel);
-//
-//                    if (success) {
-//                        Toast.makeText(A_editTaskActivity.this, "Task saved successfully!", Toast.LENGTH_SHORT).show();
-//                        finish();
-//
-//                    } else {
-//                        Toast.makeText(A_editTaskActivity.this, "Failed to save task.", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                } catch (Exception e)
-//                {
-//                    Toast.makeText(A_editTaskActivity.this, "Error occur while save",  Toast.LENGTH_LONG).show();
-//                }
-//
-//
-//            }
-//        });
+        if (incomingtaskModel != null) {
+            ed_task.setText(incomingtaskModel.getName());
+            ed_taskdescription.setText(incomingtaskModel.getDescription());
+            ed_date.setText(incomingtaskModel.getDate());
+            taskcheckbox.setChecked(incomingtaskModel.isCheckDone());
+            goalId = incomingtaskModel.getGoalid(); // overwrite with correct ID
+        }
 
-        btn_save.setOnClickListener(view -> {
-            try {
-                TaskModel taskModel = new TaskModel(
-                        -1,
-                        ed_task.getText().toString(),
-                        ed_taskdescription.getText().toString(),
-                        taskcheckbox.isChecked(),
-                        ed_date.getText().toString(),
-                        goalId
-                );
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    DatabaseHelper db = new DatabaseHelper(A_editTaskActivity.this);
 
-                DatabaseHelper db = new DatabaseHelper(A_editTaskActivity.this);
-                boolean success = db.addOneTask(taskModel);
+                    // If checkbox is checked, treat this as delete
+                    if (taskcheckbox.isChecked() && incomingtaskModel != null && incomingtaskModel.getTaskid() != -1) {
+                        boolean deleted = db.deleteTask(incomingtaskModel.getTaskid());
+                        if (deleted) {
+                            Toast.makeText(A_editTaskActivity.this, "Task deleted successfully!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(A_editTaskActivity.this, "Failed to delete task.", Toast.LENGTH_SHORT).show();
+                        }
+                        return;
+                    }
 
-                if (success) {
-                    Toast.makeText(this, "Task saved successfully!", Toast.LENGTH_SHORT).show();
-                    // Go back to TaskView with same goalId to refresh
-                    Intent intent = new Intent(A_editTaskActivity.this, TaskView.class);
-                    intent.putExtra("goalId", goalId);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(this, "Failed to save task.", Toast.LENGTH_SHORT).show();
+                    // Otherwise, update or create a new task
+                    TaskModel updatedTask = new TaskModel(
+                            incomingtaskModel != null ? incomingtaskModel.getTaskid() : -1,
+                            ed_task.getText().toString(),
+                            ed_taskdescription.getText().toString(),
+                            taskcheckbox.isChecked(),
+                            ed_date.getText().toString(),
+                            goalId
+                    );
+
+                    boolean success;
+                    if (incomingtaskModel != null && incomingtaskModel.getTaskid() != -1) {
+                        success = db.updateTask(updatedTask);
+                    } else {
+                        success = db.addOneTask(updatedTask);
+                    }
+
+                    if (success) {
+                        Toast.makeText(A_editTaskActivity.this, "Task saved successfully!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(A_editTaskActivity.this, "Failed to save task.", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(A_editTaskActivity.this, "Error occurred while saving.", Toast.LENGTH_LONG).show();
+
                 }
-            } catch (Exception e) {
-                Toast.makeText(this, "Error occurred while saving task", Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -47,9 +47,15 @@ public class G_RecyclerViewAdapter extends RecyclerView.Adapter<G_RecyclerViewAd
         holder.dateTextView.setText(goal.getDate());
 
 
+//        holder.itemBtn.setOnClickListener(v -> {
+//            Intent intent = new Intent(context, EditGoalActivity.class);
+//            intent.putExtra("item", goals.get(position));  // Pass the object
+//            context.startActivity(intent);
+//        });
+
         holder.itemBtn.setOnClickListener(v -> {
             Intent intent = new Intent(context, EditGoalActivity.class);
-            intent.putExtra("item", goals.get(position));  // Pass the object
+            intent.putExtra("goal", goals.get(position));  // Pass the GoalModel object
             context.startActivity(intent);
         });
     }

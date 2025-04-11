@@ -41,6 +41,9 @@ public class EditGoalActivity extends AppCompatActivity {
             return insets;
         });
 
+
+
+
         btn_save = findViewById(R.id.btn_save);
         btn_task = findViewById(R.id.btn_task);
         ed_goal = findViewById(R.id.ed_goal);
@@ -78,6 +81,15 @@ public class EditGoalActivity extends AppCompatActivity {
                 startActivity(new Intent(EditGoalActivity.this, TaskView.class));
             }
         });
+
+
+        GoalModel goal = (GoalModel) getIntent().getSerializableExtra("goal");
+        if (goal != null) {
+            ed_goal.setText(goal.getName());  // Set goal name to EditText
+            ed_goaldescription.setText(goal.getDescription());  // Set goal description
+            ed_date.setText(goal.getDate());  // Set goal date
+            goalcheckbox.setChecked(goal.isCheckDone());  // Set checkbox state
+        }
 }
 
             @Override

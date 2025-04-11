@@ -62,20 +62,26 @@ public class A_editTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TaskModel taskModel;
                 GoalModel goalModel;
-                taskModel = new TaskModel(-1,ed_taskdescription.getText().toString(), taskcheckbox.isChecked(), ed_date.getText().toString(), goalId);
+
+                try {
+                    taskModel = new TaskModel(-1, ed_task.getText().toString(), ed_taskdescription.getText().toString(), taskcheckbox.isChecked(), ed_date.getText().toString(), goalId);
+
+                    DatabaseHelper db = new DatabaseHelper(A_editTaskActivity.this);
+                    boolean success = db.addOneTask(taskModel);
+
+                    if (success) {
+                        Toast.makeText(A_editTaskActivity.this, "Task saved successfully!", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(A_editTaskActivity.this, "Failed to save task.", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (Exception e)
+                {
+                    Toast.makeText(A_editTaskActivity.this, "Error occur while save",  Toast.LENGTH_LONG).show();
+                }
 
                 DatabaseHelper db = new DatabaseHelper(A_editTaskActivity.this);
-                boolean success = db.addOneTask(taskModel);
-
-                //for testing
-                if(success)
-                {
-                    Toast.makeText(A_editTaskActivity.this, "Task saved",  Toast.LENGTH_LONG).show();
-
-                }
-                else {
-                    Toast.makeText(A_editTaskActivity.this, "Fail to save",  Toast.LENGTH_LONG).show();
-                }
 
             }
         });

@@ -70,6 +70,7 @@ public class A_editTaskActivity extends AppCompatActivity {
 
                     if (success) {
                         Toast.makeText(A_editTaskActivity.this, "Task saved successfully!", Toast.LENGTH_SHORT).show();
+                        finish();
 
                     } else {
                         Toast.makeText(A_editTaskActivity.this, "Failed to save task.", Toast.LENGTH_SHORT).show();

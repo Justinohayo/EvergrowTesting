@@ -59,6 +59,7 @@ public class EditGoalActivity extends AppCompatActivity {
                     boolean success = db.addOneGoal(goalModel);
                     if (success) {
                         Toast.makeText(EditGoalActivity.this, "Task saved successfully!", Toast.LENGTH_SHORT).show();
+                        finish();
 
                     } else {
                         Toast.makeText(EditGoalActivity.this, "Failed to save task.", Toast.LENGTH_SHORT).show();

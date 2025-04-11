@@ -48,12 +48,7 @@ public class TaskView extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView2);
         //setUpDailyTasks();
 
-        goalId = getIntent().getIntExtra("goalId", -1);
-        if (goalId != -1) {
-            setUpTasks(goalId);
-        }else {
-            Toast.makeText(TaskView.this, "Invalid goalId: " + goalId, Toast.LENGTH_SHORT).show();
-        }
+        setUpAllTasks();
 
 //        DT_RecyclerViewAdapter adapter = new DT_RecyclerViewAdapter(this, tasks);
 //        recyclerView.setAdapter(adapter);
@@ -142,5 +137,26 @@ public class TaskView extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void setUpAllTasks() {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        tasks = dbHelper.getAllTasks();
+
+        if (tasks != null && !tasks.isEmpty()) {
+            DT_RecyclerViewAdapter adapter = new DT_RecyclerViewAdapter(this, tasks);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
+        } else {
+            recyclerView.setAdapter(null);
+            Toast.makeText(this, "No tasks found in the database.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpAllTasks(); // Fetch goals again from DB
+
     }
 }

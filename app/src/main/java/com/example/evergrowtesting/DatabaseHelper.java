@@ -177,6 +177,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rows > 0;
 
     }
+    public ArrayList<TaskModel> getAllTasks() {
+        ArrayList<TaskModel> tasks = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TASK_TABLE, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int taskId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TASKID));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TASK_NAME));
+                String desc = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION));
+                boolean isComplete = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CHECKDONE)) == 1;
+                String date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE));
+                int goalId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_GOALID));
+
+                tasks.add(new TaskModel(taskId, name, desc, isComplete, date, goalId));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return tasks;
+    }
 
 
 

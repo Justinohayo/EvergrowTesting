@@ -55,6 +55,7 @@ public class A_editTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TaskModel taskModel;
                 GoalModel goalModel;
+
                 taskModel = new TaskModel(-1,ed_taskdescription.getText().toString(), taskcheckbox.isChecked(), ed_date.getText().toString(), goalId);
 
                 DatabaseHelper db = new DatabaseHelper(A_editTaskActivity.this);

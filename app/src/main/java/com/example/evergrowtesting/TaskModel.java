@@ -2,7 +2,9 @@ package com.example.evergrowtesting;
 
 import androidx.annotation.NonNull;
 
-public class TaskModel {
+import java.io.Serializable;
+
+public class TaskModel implements Serializable {
 
     private int taskid;
     private String Description;
@@ -17,7 +19,7 @@ public class TaskModel {
     //contructors for addint daily tasks to the long term goal db
     public TaskModel(int taskid, String description, boolean checkDone, String date, int goalid) {
         this.taskid = taskid;
-        Description = description;
+        this.Description = description;
         this.checkDone = checkDone;
         this.date = date;
         this.goalid = goalid;
@@ -35,6 +37,10 @@ public class TaskModel {
     public TaskModel()
     {
 
+    }
+
+    public TaskModel(String description){
+        this.Description = description;
     }
 
     //ToString for testing

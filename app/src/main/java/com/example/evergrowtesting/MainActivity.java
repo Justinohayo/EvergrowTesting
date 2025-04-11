@@ -21,7 +21,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<Task> dailyTasks = new ArrayList<>();
+    ArrayList<TaskModel> dailyTasks = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         String[] dailyTaskNames = getResources().getStringArray(R.array.bogy_data);
 
         for(int i=0; i<dailyTaskNames.length; i++) {
-            dailyTasks.add(new Task(dailyTaskNames[i]));
+            dailyTasks.add(new TaskModel(dailyTaskNames[i]));
         }
 
 

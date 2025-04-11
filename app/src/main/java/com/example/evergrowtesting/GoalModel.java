@@ -1,6 +1,8 @@
 package com.example.evergrowtesting;
 
-public class GoalModel {
+import java.io.Serializable;
+
+public class GoalModel implements Serializable {
 
     private int goalId;
     private String description;

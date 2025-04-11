@@ -1,9 +1,11 @@
 package com.example.evergrowtesting;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -36,6 +38,12 @@ public class G_RecyclerViewAdapter extends RecyclerView.Adapter<G_RecyclerViewAd
     public void onBindViewHolder(@NonNull G_RecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.taskCheckBox.setText(goals.get(position).getDescription());
         holder.dateTextView.setText(goals.get(position).getDate());
+
+        holder.itemBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(context, EditGoalActivity.class);
+            intent.putExtra("item", goals.get(position));  // Pass the object
+            context.startActivity(intent);
+        });
     }
 
 
@@ -48,12 +56,14 @@ public class G_RecyclerViewAdapter extends RecyclerView.Adapter<G_RecyclerViewAd
 
         CheckBox taskCheckBox;
         TextView dateTextView;
+        Button itemBtn;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             taskCheckBox = itemView.findViewById(R.id.checkBox);
             dateTextView = itemView.findViewById(R.id.textView);
+            itemBtn = itemView.findViewById(R.id.itemBtn);
 
         }
     }

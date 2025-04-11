@@ -115,5 +115,5 @@ public class EditGoalActivity extends AppCompatActivity {
 
             public void onClickEditGoalButton(View view) {
                 startActivity(new Intent(EditGoalActivity.this, TaskView.class));
-            }
+            }}
 

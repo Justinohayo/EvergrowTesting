@@ -74,7 +74,6 @@ public class EditGoalActivity extends AppCompatActivity {
 
 
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -88,25 +87,25 @@ public class EditGoalActivity extends AppCompatActivity {
         // Handle item selection based on ID
         switch (Objects.requireNonNull(item.getTitle().toString())) {
             case "Daily Tasks":
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(EditGoalActivity.this, MainActivity.class));
                 //Toast.makeText(this,"Daily Tasks clicked", Toast.LENGTH_SHORT).show();
                 return true;
             case "Goal View":
-                startActivity(new Intent(this, GoalView.class));
+                startActivity(new Intent(EditGoalActivity.this, GoalView.class));
                 //Toast.makeText(this,"Goal view clicked", Toast.LENGTH_SHORT).show();
                 return true;
             case "Edit Goal":
-                startActivity(new Intent(this, EditGoalActivity.class));
+                startActivity(new Intent(EditGoalActivity.this, EditGoalActivity.class));
                 //Toast.makeText(this,"Goal edit clicked", Toast.LENGTH_SHORT).show();
                 return true;
 
             case "Task View":
-                startActivity(new Intent(this, TaskView.class));
+                startActivity(new Intent(EditGoalActivity.this, TaskView.class));
                 //Toast.makeText(this,"Task view clicked", Toast.LENGTH_SHORT).show();
                 return true;
 
             case "Edit Tasks":
-                startActivity(new Intent(this, A_editTaskActivity.class));
+                startActivity(new Intent(EditGoalActivity.this, A_editTaskActivity.class));
                 //Toast.makeText(this,"Task edit clicked", Toast.LENGTH_SHORT).show();
                 return true;
 

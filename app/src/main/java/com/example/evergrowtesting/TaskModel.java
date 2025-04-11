@@ -11,13 +11,14 @@ public class TaskModel implements Serializable {
     private boolean checkDone;
     private String date;
     private int goalid;
+    private String name;
 
 //Note: Figure out how the foreign would communicate between class
     // Check how date String would work in the database
     // Foreign Key does not have a setter, how does it effect the database?
 
     //contructors for addint daily tasks to the long term goal db
-    public TaskModel(int taskid, String description, boolean checkDone, String date, int goalid) {
+    public TaskModel(int taskid, String name, String description, boolean checkDone, String date, int goalid) {
         this.taskid = taskid;
         this.Description = description;
         this.checkDone = checkDone;
@@ -53,6 +54,14 @@ public class TaskModel implements Serializable {
                 ", date='" + date + '\'' +
                 ", goalid=" + goalid +
                 '}';
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getTaskid() {

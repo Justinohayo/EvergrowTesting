@@ -2,7 +2,6 @@ package com.example.evergrowtesting;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -49,8 +48,8 @@ public class A_editTaskActivity extends AppCompatActivity {
 
         btn_save = findViewById(R.id.btn_save);
         ed_date = findViewById(R.id.ed_date);
-        ed_task = findViewById(R.id.ed_task);
-        ed_taskdescription = findViewById(R.id.ed_taskdescription);
+        ed_task = findViewById(R.id.ed_goal);
+        ed_taskdescription = findViewById(R.id.ed_goaldescription);
         taskcheckbox = findViewById(R.id.taskcheckbox);
 
         // get the id from goalmodel
@@ -62,20 +61,25 @@ public class A_editTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TaskModel taskModel;
                 GoalModel goalModel;
-                taskModel = new TaskModel(-1,ed_taskdescription.getText().toString(), taskcheckbox.isChecked(), ed_date.getText().toString(), goalId);
 
-                DatabaseHelper db = new DatabaseHelper(A_editTaskActivity.this);
-                boolean success = db.addOneTask(taskModel);
+                try {
+                    taskModel = new TaskModel(-1, ed_task.getText().toString(), ed_taskdescription.getText().toString(), taskcheckbox.isChecked(), ed_date.getText().toString(), goalId);
 
-                //for testing
-                if(success)
+                    DatabaseHelper db = new DatabaseHelper(A_editTaskActivity.this);
+                    boolean success = db.addOneTask(taskModel);
+
+                    if (success) {
+                        Toast.makeText(A_editTaskActivity.this, "Task saved successfully!", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(A_editTaskActivity.this, "Failed to save task.", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (Exception e)
                 {
-                    Toast.makeText(A_editTaskActivity.this, "Task saved",  Toast.LENGTH_LONG).show();
+                    Toast.makeText(A_editTaskActivity.this, "Error occur while save",  Toast.LENGTH_LONG).show();
+                }
 
-                }
-                else {
-                    Toast.makeText(A_editTaskActivity.this, "Fail to save",  Toast.LENGTH_LONG).show();
-                }
 
             }
         });

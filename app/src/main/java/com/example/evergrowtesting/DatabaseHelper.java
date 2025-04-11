@@ -24,6 +24,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_GOAL_CHECKDONE = "isComplete";
     public static final String COLUMN_GOAL_DATE = "deadline";
 
+    public static final String COLUMN_TASK_NAME = "name";
+    public static final String COLUMN_GOAL_NAME ="name";
+
     public DatabaseHelper(@Nullable Context context) {
         super(context, "Database.db", null, 1);
     }
@@ -32,12 +35,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createGoalTable = "CREATE TABLE " + GOAL_TABLE + " (" +
                 COLUMN_GOALID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_GOAL_NAME + " TEXT, " +
                 COLUMN_GOAL_DESCRIPTION + " TEXT, " +
                 COLUMN_GOAL_CHECKDONE + " BOOL, " +
                 COLUMN_GOAL_DATE + " TEXT)";
 
         String createTaskTable = "CREATE TABLE " + TASK_TABLE + " (" +
                 COLUMN_TASKID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_TASK_NAME + " TEXT, "+
                 COLUMN_DESCRIPTION + " TEXT, " +
                 COLUMN_CHECKDONE + " BOOL, " +
                 COLUMN_DATE + " TEXT, " +

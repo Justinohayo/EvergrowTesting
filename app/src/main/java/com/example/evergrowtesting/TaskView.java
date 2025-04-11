@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +26,10 @@ public class TaskView extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<TaskModel> tasks = new ArrayList<>();
 
+    Button AddTaskbutton;
+
+    int goalId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,17 +41,21 @@ public class TaskView extends AppCompatActivity {
             return insets;
         });
 
+        AddTaskbutton = findViewById(R.id.AddTaskbutton);
+
         recyclerView = findViewById(R.id.recyclerView2);
         //setUpDailyTasks();
 
-        int goalId = getIntent().getIntExtra("goalId", -1);
+        goalId = getIntent().getIntExtra("goalId", -1);
         if (goalId != -1) {
             setUpTasks(goalId);
+        }else {
+            Toast.makeText(TaskView.this, "Invalid goalId: " + goalId, Toast.LENGTH_SHORT).show();
         }
 
-        DT_RecyclerViewAdapter adapter = new DT_RecyclerViewAdapter(this, tasks);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        DT_RecyclerViewAdapter adapter = new DT_RecyclerViewAdapter(this, tasks);
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 //    public void setUpDailyTasks() {
@@ -56,10 +68,37 @@ public class TaskView extends AppCompatActivity {
 //
 //    }
 
-    public void setUpTasks(int selectedGoalId) {
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
-        tasks = dbHelper.getTasksByGoalId(selectedGoalId);
+    public void onClickAddTask(View view) {
+        int passedGoalId = getIntent().getIntExtra("goalId", -1);
+
+        if (passedGoalId != -1) {
+            Intent intent = new Intent(TaskView.this, A_editTaskActivity.class);
+            intent.putExtra("goalId", passedGoalId);
+            startActivity(intent);
+        } else {
+            Toast.makeText(TaskView.this, "Goal ID not found. Cannot add task.", Toast.LENGTH_SHORT).show();
+        }
     }
+
+
+//    public void setUpTasks(int selectedGoalId) {
+//        DatabaseHelper dbHelper = new DatabaseHelper(this);
+//        tasks = dbHelper.getTasksByGoalId(selectedGoalId);
+//    }
+
+    public void setUpTasks(int goalId) {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        tasks = dbHelper.getTasksByGoalId(goalId); // use the field, not a new local variable
+
+        if (tasks != null && !tasks.isEmpty()) {
+            DT_RecyclerViewAdapter adapter = new DT_RecyclerViewAdapter(this, tasks);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        } else {
+            Toast.makeText(TaskView.this, "No tasks found for this goal.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 
     @Override

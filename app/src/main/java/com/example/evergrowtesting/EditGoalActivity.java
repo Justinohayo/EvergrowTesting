@@ -133,7 +133,17 @@ public class EditGoalActivity extends AppCompatActivity {
                 }
             }
 
-            public void onClickEditGoalButton(View view) {
-                startActivity(new Intent(EditGoalActivity.this, TaskView.class));
-            }}
+                public void onClickEditGoalButton(View view) {
+                    GoalModel goal = (GoalModel) getIntent().getSerializableExtra("goal");
+                    if (goal != null) {
+                        int goalId = goal.getGoalId();
+                        // Pass the goalId to TaskView
+                        Intent intent = new Intent(EditGoalActivity.this, TaskView.class);
+                        intent.putExtra("goalId", goalId);
+                        startActivity(intent);
+                        Toast.makeText(EditGoalActivity.this, "goalID " + goalId, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(EditGoalActivity.this, "Goal data not found.", Toast.LENGTH_SHORT).show();
+                    }
+                }}
 

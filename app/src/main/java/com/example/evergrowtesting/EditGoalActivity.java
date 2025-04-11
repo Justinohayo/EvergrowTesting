@@ -7,6 +7,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 import androidx.activity.EdgeToEdge;
@@ -19,8 +22,10 @@ import java.util.Objects;
 
 public class EditGoalActivity extends AppCompatActivity {
 
-
-    Button button;
+    Button btn_save, btn_task;
+    EditText ed_goal, ed_goaldescription, ed_date;
+    CheckBox goalcheckbox;
+    TextView tv_task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,9 @@ public class EditGoalActivity extends AppCompatActivity {
             return insets;
         });
 
-        button = findViewById(R.id.button);
+
+
+
     }
 
     @Override

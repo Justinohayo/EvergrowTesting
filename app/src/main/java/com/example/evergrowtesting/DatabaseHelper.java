@@ -84,6 +84,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+
+
     public ArrayList<GoalModel> getAllGoals() {
         ArrayList<GoalModel> goals = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -131,6 +133,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return tasks;
     }
+
 
 
 
